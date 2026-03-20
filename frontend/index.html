@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Predictor</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>House Price Predictor</h1>
+            <p>Enter property details to get an instant valuation</p>
+        </header>
+        
+        <main>
+            <form id="predictionForm" class="prediction-card">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label for="bedrooms">Bedrooms</label>
+                        <input type="number" id="bedrooms" name="bedrooms" placeholder="e.g. 3" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="bathrooms">Bathrooms</label>
+                        <input type="number" id="bathrooms" name="bathrooms" step="0.5" placeholder="e.g. 2.5" required min="0">
+                    </div>
+                    <div class="input-group">
+                        <label for="sqft_living">Sqft Living</label>
+                        <input type="number" id="sqft_living" name="sqft_living" placeholder="e.g. 1500" required min="100">
+                    </div>
+                    <div class="input-group">
+                        <label for="floors">Floors</label>
+                        <input type="number" id="floors" name="floors" step="0.5" placeholder="e.g. 1" required min="1">
+                    </div>
+                    <div class="input-group">
+                        <label for="view">View Rating (0-4)</label>
+                        <input type="number" id="view" name="view" placeholder="e.g. 2" required min="0" max="4">
+                    </div>
+                    <div class="input-group">
+                        <label for="yr_built">Year Built</label>
+                        <input type="number" id="yr_built" name="yr_built" placeholder="e.g. 1995" required min="1800" max="2026">
+                    </div>
+                    <div class="input-group checkbox-group">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="waterfront" name="waterfront">
+                            <span class="checkmark"></span>
+                            Waterfront Property
+                        </label>
+                    </div>
+                </div>
+                
+                <button type="submit" id="predictBtn" class="btn-primary">
+                    <span class="btn-text">Predict Price</span>
+                    <div class="loader" id="loader"></div>
+                </button>
+            </form>
+
+            <div id="resultContainer" class="result-card hidden">
+                <h3>Estimated Value</h3>
+                <div class="price-display">
+                    <span class="currency">$</span>
+                    <span id="predictedPrice">0.00</span>
+                </div>
+                <p class="disclaimer">Based on current market data and building characteristics.</p>
+            </div>
+        </main>
+        
+        <footer>
+            <p>&copy; 2026 AI House Price Prediction Service</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
