@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+
 from pydantic import BaseModel
 import pickle
 import numpy as np
@@ -34,10 +36,6 @@ class HouseFeatures(BaseModel):
     view: int
     yr_built: int
 
-@app.get("/")
-def read_root():
-    return {"message": "House Price Prediction API is running"}
-
 @app.post("/predict")
 def predict_price(features: HouseFeatures):
     if model is None:
@@ -59,6 +57,19 @@ def predict_price(features: HouseFeatures):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
+# Serve static files from the project root directory
+backend_dir = os.path.dirname(os.path.abspath(__file__))
+project_root = os.path.dirname(backend_dir)
+
+# On Vercel, the static files are served by Vercel directly, not by FastAPI.
+if not os.environ.get("VERCEL"):
+    if os.path.exists(os.path.join(project_root, "index.html")):
+        app.mount("/", StaticFiles(directory=project_root, html=True), name="frontend")
+    else:
+        print(f"Warning: Static files (index.html) not found in {project_root}")
+
 if __name__ == "__main__":
     import uvicorn
+    print(f"Starting server at http://127.0.0.1:8000")
+    print(f"Serving frontend from: {frontend_path}")
     uvicorn.run(app, host="127.0.0.1", port=8000)

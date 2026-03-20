@@ -8,6 +8,12 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
+        // Check if running via file protocol
+        if (window.location.protocol === 'file:') {
+            alert('Error: You are running the HTML file directly. Please use http://localhost:8000 instead to communicate with the backend.');
+            return;
+        }
+
         // Show loading state
         loader.style.display = 'block';
         btnText.style.opacity = '0.5';
@@ -25,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('http://localhost:8000/predict', {
+            const response = await fetch('/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,8 +40,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (!response.ok) {
-                const error = await response.json();
-                throw new Error(error.detail || 'Failed to get prediction');
+                let errorMsg = 'Failed to get prediction';
+                const errorText = await response.text();
+                try {
+                    const errorJson = JSON.parse(errorText);
+                    errorMsg = errorJson.detail || errorMsg;
+                } catch (e) {
+                    errorMsg = errorText || errorMsg;
+                }
+
+                if (window.location.port === '5500') {
+                    errorMsg += '\n\nTIP: You are using Port 5500 (Live Server). Please use Port 8000 for full backend connectivity.';
+                }
+                
+                throw new Error(errorMsg);
             }
 
             const result = await response.json();
