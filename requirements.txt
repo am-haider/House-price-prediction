@@ -1,7 +1,8 @@
 fastapi
 pydantic
-numpy
+numpy==2.4.3
 uvicorn
-scikit-learn
+scikit-learn==1.8.0
 aiofiles
 python-multipart
+pandas==2.3.3
