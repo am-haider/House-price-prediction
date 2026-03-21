@@ -36,6 +36,15 @@ class HouseFeatures(BaseModel):
     view: int
     yr_built: int
 
+@app.get("/health")
+def health_check():
+    """Keep-alive endpoint — ping this every 5 min to prevent Render free-tier spin-down."""
+    return {"status": "ok"}
+
+@app.get("/ping")
+def ping():
+    return {"message": "pong"}
+
 @app.post("/predict")
 def predict_price(features: HouseFeatures):
     if model is None:
