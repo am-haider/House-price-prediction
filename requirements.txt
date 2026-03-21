@@ -1,9 +1,9 @@
 fastapi
 pydantic
-numpy==1.26.4
-uvicorn[standard]
-scikit-learn==1.4.2
+numpy
+uvicorn
+scikit-learn
 aiofiles
 python-multipart
-pandas==2.2.2
-gunicorn==21.2.0
+pandas
+gunicorn
