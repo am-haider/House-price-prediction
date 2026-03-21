@@ -1,4 +1,3 @@
-from backend.main import app
-
-# This is the entry point for Vercel serverless functions.
-# It exports the FastAPI app from the backend module.
+# This file is no longer used.
+# The app entry point for Render is: backend/main.py
+# Start command: uvicorn backend.main:app --host 0.0.0.0 --port $PORT

@@ -57,19 +57,21 @@ def predict_price(features: HouseFeatures):
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
-# Serve static files from the project root directory
+# Serve static files from the Frontend directory
 backend_dir = os.path.dirname(os.path.abspath(__file__))
 project_root = os.path.dirname(backend_dir)
+frontend_path = os.path.join(project_root, "Frontend")
 
 # On Vercel, the static files are served by Vercel directly, not by FastAPI.
 if not os.environ.get("VERCEL"):
-    if os.path.exists(os.path.join(project_root, "index.html")):
-        app.mount("/", StaticFiles(directory=project_root, html=True), name="frontend")
+    if os.path.exists(os.path.join(frontend_path, "index.html")):
+        app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
     else:
-        print(f"Warning: Static files (index.html) not found in {project_root}")
+        print(f"Warning: Static files (index.html) not found in {frontend_path}")
 
 if __name__ == "__main__":
     import uvicorn
-    print(f"Starting server at http://127.0.0.1:8000")
+    port = int(os.environ.get("PORT", 8000))
+    print(f"Starting server at http://0.0.0.0:{port}")
     print(f"Serving frontend from: {frontend_path}")
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=port)
