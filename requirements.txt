@@ -6,3 +6,4 @@ scikit-learn==1.4.2
 aiofiles
 python-multipart
 pandas==2.2.2
+gunicorn==-25.1.0
