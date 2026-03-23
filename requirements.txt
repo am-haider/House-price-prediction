@@ -1,9 +1,0 @@
-fastapi
-pydantic
-numpy
-uvicorn[standard]
-scikit-learn
-aiofiles
-python-multipart
-pandas
-gunicorn

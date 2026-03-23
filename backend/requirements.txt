@@ -1,7 +1,7 @@
 fastapi
 pydantic
 numpy
-uvicorn
+uvicorn[standard]
 scikit-learn
 aiofiles
 python-multipart
