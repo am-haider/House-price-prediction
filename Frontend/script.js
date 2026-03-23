@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         try {
-            const response = await fetch('/predict', {
+            const response = await fetch('https://house-price-prediction-by.up.railway.app/predict', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
