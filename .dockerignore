@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+
+# Git
+.git/
+.gitignore
+
+# Dev / notebook files
+notebooks/
+data/
+server_log.txt
+render.yaml
+
+# Editor
+.vscode/
+.idea/
