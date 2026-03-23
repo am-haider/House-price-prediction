@@ -1,0 +1,7 @@
+backend/.venv
+backend/__pycache__
+backend/server_log.txt
+backend/New folder
+backend/house-price
+notebooks/
+.git
